@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grid-Guard Preview</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Rajdhani:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg:        #0a0e14;
+    --bg2:       #0d1117;
+    --bg3:       #111820;
+    --border:    #1e3a5f;
+    --blue:      #58a6ff;
+    --red:       #f85149;
+    --green:     #3fb950;
+    --text:      #c9d1d9;
+    --muted:     #8b949e;
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Rajdhani', sans-serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* ── Layout ── */
+  .layout { display: flex; flex: 1; }
+
+  /* ── Sidebar ── */
+  .sidebar {
+    width: 220px;
+    background: var(--bg2);
+    border-right: 1px solid var(--border);
+    padding: 1.5rem 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    flex-shrink: 0;
+  }
+  .sidebar-logo { font-family: 'Share Tech Mono', monospace; font-size: 1.3rem; color: var(--blue); letter-spacing: 3px; }
+  .sidebar-sub  { font-size: 0.75rem; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; margin-top: -0.5rem; }
+  .sidebar-divider { border: none; border-top: 1px solid var(--border); }
+
+  .control-label { font-size: 0.72rem; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px; }
+  .control-value { font-size: 1.1rem; font-weight: 700; color: var(--blue); }
+
+  .fake-slider {
+    width: 100%; height: 4px; background: var(--border);
+    border-radius: 2px; position: relative; margin: 6px 0 14px;
+  }
+  .fake-slider-fill {
+    position: absolute; left: 0; top: 0; height: 100%;
+    background: var(--blue); border-radius: 2px;
+  }
+  .fake-slider-thumb {
+    position: absolute; top: -6px; width: 14px; height: 14px;
+    background: var(--blue); border-radius: 50%;
+    box-shadow: 0 0 8px var(--blue);
+  }
+
+  .run-btn {
+    width: 100%; padding: 0.7rem; border: none; border-radius: 6px;
+    background: var(--blue); color: #0a0e14;
+    font-family: 'Share Tech Mono', monospace; font-size: 0.9rem;
+    font-weight: 700; letter-spacing: 1px; cursor: pointer;
+    transition: background 0.2s;
+  }
+  .run-btn:hover { background: #79b8ff; }
+
+  .arch-note { font-size: 0.78rem; color: var(--muted); line-height: 1.8; }
+  .arch-note span { color: var(--green); }
+
+  /* ── Main ── */
+  .main { flex: 1; padding: 1.5rem; display: flex; flex-direction: column; gap: 1.4rem; overflow: hidden; }
+
+  .page-title {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 1.9rem; color: var(--blue); letter-spacing: 4px;
+    animation: flicker 4s infinite;
+  }
+  .page-sub { font-size: 0.82rem; color: var(--muted); letter-spacing: 1px; }
+  .divider { border: none; border-top: 1px solid var(--border); }
+
+  @keyframes flicker {
+    0%,95%,100% { opacity: 1; }
+    97%          { opacity: 0.6; }
+  }
+
+  /* ── KPI Cards ── */
+  .kpi-row { display: grid; grid-template-columns: repeat(5, 1fr); gap: 0.8rem; }
+  .kpi-card {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1rem 0.8rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .kpi-card::after {
+    content: ''; position: absolute; inset: 0;
+    background: linear-gradient(135deg, rgba(88,166,255,0.04) 0%, transparent 60%);
+  }
+  .kpi-val  { font-size: 1.9rem; font-weight: 700; color: var(--blue); font-family: 'Share Tech Mono', monospace; }
+  .kpi-val.red   { color: var(--red); }
+  .kpi-val.green { color: var(--green); }
+  .kpi-lbl  { font-size: 0.68rem; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; margin-top: 4px; }
+
+  /* ── Chart area ── */
+  .section-title { font-family: 'Share Tech Mono', monospace; font-size: 0.9rem; color: var(--blue); letter-spacing: 2px; margin-bottom: 0.6rem; }
+
+  .chart-wrap {
+    background: var(--bg3); border: 1px solid var(--border); border-radius: 8px;
+    padding: 1rem; position: relative; height: 160px;
+  }
+  svg.chart { width: 100%; height: 100%; }
+
+  /* ── Bottom row ── */
+  .bottom-row { display: grid; grid-template-columns: 2fr 1fr; gap: 0.8rem; }
+
+  .table-wrap {
+    background: var(--bg3); border: 1px solid var(--border); border-radius: 8px; overflow: hidden;
+  }
+  table { width: 100%; border-collapse: collapse; font-size: 0.82rem; }
+  thead th {
+    background: var(--bg2); color: var(--muted); text-transform: uppercase;
+    font-size: 0.68rem; letter-spacing: 1px; padding: 0.5rem 0.8rem; text-align: left;
+  }
+  tbody td { padding: 0.45rem 0.8rem; border-top: 1px solid var(--border); }
+  tbody tr:hover { background: rgba(88,166,255,0.05); }
+  .td-red { color: var(--red); font-weight: 700; }
+  .td-blue { color: var(--blue); }
+
+  .stats-card {
+    background: var(--bg3); border: 1px solid var(--border); border-radius: 8px; padding: 1rem;
+    display: flex; flex-direction: column; gap: 0.7rem;
+  }
+  .stat-row { display: flex; justify-content: space-between; align-items: baseline; }
+  .stat-key { font-size: 0.75rem; color: var(--muted); }
+  .stat-val { font-size: 1rem; font-weight: 700; color: var(--blue); font-family: 'Share Tech Mono', monospace; }
+  .stat-delta { font-size: 0.72rem; color: var(--red); }
+
+  /* Bar chart */
+  .bar-chart-wrap {
+    background: var(--bg3); border: 1px solid var(--border); border-radius: 8px; padding: 1rem; height: 100px;
+    display: flex; align-items: flex-end; gap: 3px;
+  }
+  .bar {
+    flex: 1; background: var(--red); border-radius: 2px 2px 0 0;
+    opacity: 0.8; transition: opacity 0.2s;
+    animation: barrise 0.8s ease both;
+  }
+  @keyframes barrise { from { transform: scaleY(0); transform-origin: bottom; } to { transform: scaleY(1); } }
+
+  /* Pulse dot */
+  .live-dot {
+    display: inline-block; width: 8px; height: 8px; border-radius: 50%;
+    background: var(--green); margin-right: 6px;
+    animation: pulse 1.5s infinite;
+  }
+  @keyframes pulse {
+    0%,100% { box-shadow: 0 0 0 0 rgba(63,185,80,0.6); }
+    50%      { box-shadow: 0 0 0 6px rgba(63,185,80,0); }
+  }
+</style>
+</head>
+<body>
+
+<div class="layout">
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div>
+      <div class="sidebar-logo">⚡ GRID-GUARD</div>
+      <div class="sidebar-sub">AMD Edge Edition</div>
+    </div>
+    <hr class="sidebar-divider">
+
+    <div>
+      <div class="control-label">Dataset size</div>
+      <div class="control-value">500,000</div>
+      <div class="fake-slider">
+        <div class="fake-slider-fill" style="width:100%"></div>
+        <div class="fake-slider-thumb" style="left:calc(100% - 7px)"></div>
+      </div>
+
+      <div class="control-label">Expected anomaly rate</div>
+      <div class="control-value">0.0010</div>
+      <div class="fake-slider">
+        <div class="fake-slider-fill" style="width:15%"></div>
+        <div class="fake-slider-thumb" style="left:calc(15% - 7px)"></div>
+      </div>
+
+      <div class="control-label">Viz sample (points)</div>
+      <div class="control-value">1,000</div>
+      <div class="fake-slider">
+        <div class="fake-slider-fill" style="width:30%"></div>
+        <div class="fake-slider-thumb" style="left:calc(30% - 7px)"></div>
+      </div>
+    </div>
+
+    <hr class="sidebar-divider">
+    <button class="run-btn">🔍 RUN DETECTION</button>
+    <hr class="sidebar-divider">
+
+    <div class="arch-note">
+      <span>🖥️</span> 100% on-device (AMD edge)<br>
+      <span>🚫</span> Zero cloud egress<br>
+      <span>⚡</span> IsolationForest (CPU)<br>
+      <span>🌱</span> Low-carbon inference
+    </div>
+  </aside>
+
+  <!-- Main content -->
+  <main class="main">
+    <div>
+      <div class="page-title">⚡ GRID-GUARD</div>
+      <div class="page-sub"><span class="live-dot"></span>LIVE · Real-time power anomaly detection · AMD Edge Architecture · Zero cloud dependency</div>
+    </div>
+    <hr class="divider">
+
+    <!-- KPI Row -->
+    <div class="kpi-row">
+      <div class="kpi-card">
+        <div class="kpi-val">500,000</div>
+        <div class="kpi-lbl">Data Points</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-val red">487</div>
+        <div class="kpi-lbl">Anomalies Found</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-val">0.097%</div>
+        <div class="kpi-lbl">Anomaly Rate</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-val">142ms</div>
+        <div class="kpi-lbl">Detection Time</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-val green">NOMINAL</div>
+        <div class="kpi-lbl">Grid Status</div>
+      </div>
+    </div>
+
+    <!-- Power signal chart -->
+    <div>
+      <div class="section-title">📊 POWER SIGNAL (sampled — 1,000 pts)</div>
+      <div class="chart-wrap">
+        <svg class="chart" id="powerChart" viewBox="0 0 900 130" preserveAspectRatio="none"></svg>
+      </div>
+    </div>
+
+    <!-- Bottom row: table + stats -->
+    <div class="bottom-row">
+      <div>
+        <div class="section-title">🚨 TOP 10 ANOMALIES BY SEVERITY</div>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>#</th><th>Timestep</th><th>Power (kW)</th><th>Anomaly Score</th><th>Hour</th></tr></thead>
+            <tbody id="anomalyTable"></tbody>
+          </table>
+        </div>
+      </div>
+      <div>
+        <div class="section-title">📈 STATS</div>
+        <div class="stats-card">
+          <div class="stat-row"><span class="stat-key">Mean normal power</span><span class="stat-val">10.02 kW</span></div>
+          <div class="stat-row"><span class="stat-key">Mean anomaly power</span><span class="stat-val">44.71 kW <span class="stat-delta">+34.69 ↑</span></span></div>
+          <div class="stat-row"><span class="stat-key">Max anomaly spike</span><span class="stat-val">59.83 kW</span></div>
+          <div class="stat-row"><span class="stat-key">Data generation</span><span class="stat-val">891 ms</span></div>
+          <div class="stat-row"><span class="stat-key">ML inference</span><span class="stat-val">142 ms</span></div>
+          <hr class="sidebar-divider" style="border-color:#1e3a5f">
+          <div class="section-title" style="margin-bottom:0.3rem">🕐 ANOMALIES BY HOUR</div>
+          <div class="bar-chart-wrap" id="hourBars"></div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<script>
+// ── Generate sine-wave chart with anomaly spikes ──────────────────────────
+(function() {
+  const svg = document.getElementById('powerChart');
+  const W = 900, H = 130, N = 1000;
+  const pts = [], anomalyPts = [];
+
+  for (let i = 0; i < N; i++) {
+    const t = i / N;
+    let y = 10 + 5 * Math.sin(2 * Math.PI * i / 40) + (Math.random() - 0.5) * 2;
+    const isAnomaly = Math.random() < 0.005;
+    if (isAnomaly) { y += 20 + Math.random() * 30; anomalyPts.push({i, y}); }
+    pts.push(y);
+  }
+
+  const minY = Math.min(...pts) - 2, maxY = Math.max(...pts) + 2;
+  const px = i => (i / N) * W;
+  const py = v => H - ((v - minY) / (maxY - minY)) * H;
+
+  // Normal line
+  let d = `M ${px(0)} ${py(pts[0])}`;
+  for (let i = 1; i < N; i++) {
+    if (anomalyPts.find(a => a.i === i)) continue;
+    d += ` L ${px(i)} ${py(pts[i])}`;
+  }
+  const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+  path.setAttribute('d', d); path.setAttribute('stroke', '#58a6ff');
+  path.setAttribute('stroke-width', '1.2'); path.setAttribute('fill', 'none');
+  path.setAttribute('opacity', '0.8');
+  svg.appendChild(path);
+
+  // Anomaly spikes
+  anomalyPts.forEach(({i, y}) => {
+    const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+    circle.setAttribute('cx', px(i)); circle.setAttribute('cy', py(y));
+    circle.setAttribute('r', '4'); circle.setAttribute('fill', '#f85149');
+    circle.setAttribute('opacity', '0.9');
+    svg.appendChild(circle);
+
+    const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+    line.setAttribute('x1', px(i)); line.setAttribute('y1', py(pts[i - 1] || 10));
+    line.setAttribute('x2', px(i)); line.setAttribute('y2', py(y));
+    line.setAttribute('stroke', '#f85149'); line.setAttribute('stroke-width', '1');
+    line.setAttribute('opacity', '0.4');
+    svg.appendChild(line);
+  });
+})();
+
+// ── Populate anomaly table ─────────────────────────────────────────────────
+(function() {
+  const tbody = document.getElementById('anomalyTable');
+  const rows = [
+    [1, 381224, 59.83, -0.3841, 9],
+    [2, 127443, 57.21, -0.3712, 3],
+    [3, 490012, 56.07, -0.3608, 14],
+    [4, 88321,  54.93, -0.3490, 21],
+    [5, 221100, 53.14, -0.3387, 7],
+    [6, 312087, 51.88, -0.3281, 11],
+    [7, 44401,  50.42, -0.3172, 18],
+    [8, 198034, 49.91, -0.3063, 5],
+    [9, 403221, 48.23, -0.2944, 23],
+    [10,76510,  47.09, -0.2833, 16],
+  ];
+  rows.forEach(([n, ts, pw, sc, hr]) => {
+    const tr = document.createElement('tr');
+    tr.innerHTML = `<td class="td-blue">${n}</td><td>${ts.toLocaleString()}</td><td class="td-red">${pw.toFixed(2)}</td><td>${sc.toFixed(4)}</td><td>${hr}:00</td>`;
+    tbody.appendChild(tr);
+  });
+})();
+
+// ── Hour-of-day bars ───────────────────────────────────────────────────────
+(function() {
+  const container = document.getElementById('hourBars');
+  const counts = [8,5,3,2,4,6,12,18,22,19,14,11,9,15,17,21,24,20,13,10,7,9,16,11];
+  const max = Math.max(...counts);
+  counts.forEach((c, i) => {
+    const bar = document.createElement('div');
+    bar.className = 'bar';
+    bar.style.height = (c / max * 100) + '%';
+    bar.style.animationDelay = (i * 0.03) + 's';
+    bar.title = `Hour ${i}:00 — ${c} anomalies`;
+    container.appendChild(bar);
+  });
+})();
+</script>
+</body>
+</html>
