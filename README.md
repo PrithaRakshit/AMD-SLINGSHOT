@@ -36,6 +36,7 @@ flowchart TD
     F --> G["Anomaly Visualization"]
     F --> H["Detection Metrics"]
 
+
  5. Why Isolation Forest?
 
 Isolation Forest was selected because it is an unsupervised machine learning algorithm suitable for detecting unusual observations in numerical datasets.
