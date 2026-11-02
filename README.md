@@ -159,5 +159,8 @@ GitHub: "PrithaRakshit" (https://github.com/PrithaRakshit)
 
 ![Grid-Guard Anomaly Detection Dashboard](https://github.com/PrithaRakshit/AMD-SLINGSHOT/blob/main/2026-11-03T00-27_chart.png?raw=true)
 
+15. Dashboard Overview
+![Grid-Guard Dashboard Overview](
+
 
 An exploratory project focused on machine learning, time-series analysis, and anomaly detection.
