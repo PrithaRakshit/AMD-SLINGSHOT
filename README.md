@@ -162,7 +162,7 @@ GitHub: "PrithaRakshit" (https://github.com/PrithaRakshit)
 
 15. Dashboard Overview
 ![Grid-Guard Dashboard Overview](https://github.com/PrithaRakshit/AMD-SLINGSHOT/blob/main/Screenshot%202026-11-03%20011131.png?raw=true)
-![Grid-Guard Dashboard Overview](
+![Grid-Guard Dashboard Overview](https://github.com/PrithaRakshit/AMD-SLINGSHOT/blob/main/Screenshot%202026-11-03%20013525.png?raw=true)
 
 
 
