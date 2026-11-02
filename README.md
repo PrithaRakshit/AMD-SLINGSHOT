@@ -36,6 +36,8 @@ flowchart TD
     F --> G["Anomaly Visualization"]
     F --> H["Detection Metrics"]
 
+```
+
 
  5. Why Isolation Forest?
 
