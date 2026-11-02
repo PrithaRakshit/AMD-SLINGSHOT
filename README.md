@@ -24,7 +24,20 @@ This project explores how unsupervised machine learning can be applied to detect
 - Analyse and visualize detected anomalies.
 - Develop an interactive dashboard for presenting the results.
 
-4. Technology Stack
+4. Architecture
+
+```mermaid
+flowchart TD
+    A["Synthetic Power Data Generation"] --> B["Artificial Anomaly Injection"]
+    B --> C["Data Preparation"]
+    C --> D["Isolation Forest Model"]
+    D --> E["Anomaly Prediction and Scoring"]
+    E --> F["Streamlit Dashboard"]
+    F --> G["Anomaly Visualization"]
+    F --> H["Detection Metrics"]
+```
+
+5. Technology Stack
 
 Component| Technology
 Programming Language| Python
@@ -33,7 +46,7 @@ Algorithm| Isolation Forest
 Data Processing| Pandas, NumPy
 Dashboard| Streamlit
 
-5. Methodology
+6. Methodology
 
 The project follows a sequence of processing stages:
 
@@ -53,7 +66,7 @@ Stage 4: Results Visualization
 
 Present consumption patterns and detected anomalies through a Streamlit dashboard.
 
-6. System Workflow
+7. System Workflow
 
 Synthetic Power Consumption Data
               |
@@ -72,7 +85,7 @@ Synthetic Power Consumption Data
               v
       Streamlit Dashboard
 
-7. Repository Structure
+8. Repository Structure
 
 AMD-SLINGSHOT/
 |
@@ -82,7 +95,7 @@ AMD-SLINGSHOT/
 |-- grid-guard-preview.html
 |-- README.md
 
-8. Installation and Execution
+9. Installation and Execution
 
 Step 1: Clone the Repository
 
@@ -100,14 +113,14 @@ Step 4: Run the Application
 
 streamlit run app.py
 
-9. Current Scope and Limitations
+10. Current Scope and Limitations
 
 - The current implementation uses synthetic power consumption data.
 - Artificial anomalies are introduced to simulate irregular consumption patterns.
 - The model has not yet been validated on real-world electricity consumption datasets.
 - Detection performance and generalization to real-world conditions require further evaluation.
 
-10. Future Scope
+11. Future Scope
 
 - Evaluate the model using real-world electricity consumption datasets.
 - Compare Isolation Forest with alternative anomaly detection algorithms.
@@ -115,7 +128,7 @@ streamlit run app.py
 - Investigate integration with IoT-based power monitoring systems.
 - Explore real-time anomaly detection using live data sources.
 
-11. Author
+12. Author
 
 Pritha Rakshit
 
