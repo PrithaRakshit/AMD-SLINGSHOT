@@ -35,9 +35,23 @@ flowchart TD
     E --> F["Streamlit Dashboard"]
     F --> G["Anomaly Visualization"]
     F --> H["Detection Metrics"]
+
+ 5. Why Isolation Forest?
+
+Isolation Forest was selected because it is an unsupervised machine learning algorithm suitable for detecting unusual observations in numerical datasets.
+
+Reasons for selecting this algorithm:
+
+- **Unsupervised learning:** Does not require labelled training data to identify potential anomalies.
+- **Isolation-based approach:** Uses random tree partitions to isolate observations. Anomalies are often isolated in fewer partitions.
+- **Numerical data compatibility:** Suitable for analysing numerical power-consumption readings.
+- **Scikit-learn integration:** Provides an accessible Python implementation.
+- **Anomaly scoring:** Provides decision scores alongside anomaly predictions.
+
+In Grid-Guard, the model uses the power-consumption feature to identify potential anomalies.
 ```
 
-5. Technology Stack
+6. Technology Stack
 
 Component| Technology
 Programming Language| Python
@@ -46,7 +60,7 @@ Algorithm| Isolation Forest
 Data Processing| Pandas, NumPy
 Dashboard| Streamlit
 
-6. Methodology
+7. Methodology
 
 The project follows a sequence of processing stages:
 
@@ -66,7 +80,7 @@ Stage 4: Results Visualization
 
 Present consumption patterns and detected anomalies through a Streamlit dashboard.
 
-7. System Workflow
+8. System Workflow
 
 Synthetic Power Consumption Data
               |
@@ -85,7 +99,7 @@ Synthetic Power Consumption Data
               v
       Streamlit Dashboard
 
-8. Repository Structure
+9. Repository Structure
 
 AMD-SLINGSHOT/
 |
@@ -95,7 +109,7 @@ AMD-SLINGSHOT/
 |-- grid-guard-preview.html
 |-- README.md
 
-9. Installation and Execution
+10. Installation and Execution
 
 Step 1: Clone the Repository
 
@@ -113,14 +127,14 @@ Step 4: Run the Application
 
 streamlit run app.py
 
-10. Current Scope and Limitations
+11. Current Scope and Limitations
 
 - The current implementation uses synthetic power consumption data.
 - Artificial anomalies are introduced to simulate irregular consumption patterns.
 - The model has not yet been validated on real-world electricity consumption datasets.
 - Detection performance and generalization to real-world conditions require further evaluation.
 
-11. Future Scope
+12. Future Scope
 
 - Evaluate the model using real-world electricity consumption datasets.
 - Compare Isolation Forest with alternative anomaly detection algorithms.
@@ -128,7 +142,7 @@ streamlit run app.py
 - Investigate integration with IoT-based power monitoring systems.
 - Explore real-time anomaly detection using live data sources.
 
-12. Author
+13. Author
 
 Pritha Rakshit
 
