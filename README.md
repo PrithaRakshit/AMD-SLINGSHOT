@@ -83,8 +83,19 @@ median detection time was calculated.
 *Note: Results are specific to the hardware and software
 environment listed above. Execution time may vary with
 system load and other runtime conditions.*
+### Performance Graph
+The following graph illustrates the relationship between dataset size and median detection time.
 
-6. Technology Stack
+```mermaid
+xychart-beta
+    title "Dataset Size vs Median Detection Time"
+    x-axis ["10K", "50K", "100K", "250K", "500K"]
+    y-axis "Detection Time (ms)" 0 --> 18000
+    bar [649, 1618, 3115, 8453, 16606]
+```
+
+
+## 6. Technology Stack
 
 Component| Technology
 Programming Language| Python
