@@ -1,6 +1,6 @@
 Grid-Guard: Local Power Anomaly Detector
 
-A Python-based machine learning project for identifying unusual patterns in power consumption data using the Isolation Forest algorithm.
+A Python-based machine learning project for identifying unusual patterns in power consumption data using Isolation Forest.
 
 1. Project Overview
 
@@ -24,26 +24,18 @@ This project explores how unsupervised machine learning can be applied to detect
 - Analyse and visualize detected anomalies.
 - Develop an interactive dashboard for presenting the results.
 
- 4. Architecture
+4. Architecture
 
 ```mermaid
 flowchart TD
-    A[Synthetic Power Data Generation]
-    B[Artificial Anomaly Injection]
-    C[Data Preparation]
-    D[Isolation Forest Model]
-    E[Anomaly Prediction and Scoring]
-    F[Streamlit Dashboard]
-    G[Anomaly Visualization]
-    H[Detection Metrics]
-
-    A --> B
-    B --> C
-    C --> D
-    D --> E
-    E --> F
-    F --> G
-    F --> H
+    A[Synthetic Power Data Generation] --> B[Artificial Anomaly Injection]
+    B --> C[Data Preparation]
+    C --> D[Isolation Forest Model]
+    D --> E[Anomaly Prediction and Scoring]
+    E --> F[Streamlit Dashboard]
+    F --> G[Anomaly Visualization]
+    F --> H[Detection Metrics]
+```
 
 5. Why Isolation Forest?
 
@@ -90,23 +82,32 @@ Present consumption patterns and detected anomalies through a Streamlit dashboar
 
 8. System Workflow
 
-flowchart TD
-    A["Synthetic Power Consumption Data"] --> B["Anomaly Injection"]
-    B --> C["Data Processing"]
-    C --> D["Isolation Forest"]
-    D --> E["Anomaly Detection"]
-    E --> F["Streamlit Dashboard"]
+Synthetic Power Consumption Data
+              |
+              v
+       Anomaly Injection
+              |
+              v
+        Data Processing
+              |
+              v
+       Isolation Forest
+              |
+              v
+       Anomaly Detection
+              |
+              v
+      Streamlit Dashboard
 
 9. Repository Structure
 
 AMD-SLINGSHOT/
-│
-├── app.py
-├── detector.py
-├── requirements.txt
-├── grid-guard-preview.html
-├── README.md
-└── Dashboard Screenshots
+|
+|-- app.py
+|-- detector.py
+|-- requirements.txt
+|-- grid-guard-preview.html
+|-- README.md
 
 10. Installation and Execution
 
@@ -151,7 +152,7 @@ GitHub: "PrithaRakshit" (https://github.com/PrithaRakshit)
 
 ---
 
-14. Dashboard Screenshots
+14. Dashboard Screenshot
 
 "Grid-Guard Anomaly Detection Dashboard" (https://github.com/PrithaRakshit/AMD-SLINGSHOT/blob/main/2026-11-03T00-27_chart.png?raw=true)
 
@@ -162,7 +163,5 @@ GitHub: "PrithaRakshit" (https://github.com/PrithaRakshit)
 "Grid-Guard Dashboard Overview" (https://github.com/PrithaRakshit/AMD-SLINGSHOT/blob/main/Screenshot%202026-11-03%20011131.png?raw=true)
 
 "Grid-Guard Dashboard Overview" (https://github.com/PrithaRakshit/AMD-SLINGSHOT/blob/main/Screenshot%202026-11-03%20013525.png?raw=true)
-
----
 
 An exploratory project focused on machine learning, time-series analysis, and anomaly detection.
