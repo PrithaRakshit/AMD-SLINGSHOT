@@ -1,8 +1,8 @@
-Grid-Guard: Local Power Anomaly Detector
+# Grid-Guard: Local Power Anomaly Detector
 
 A Python-based machine learning project for identifying unusual patterns in power consumption data using Isolation Forest.
 
-1. Project Overview
+## 1. Project Overview
 
 Grid-Guard is a machine learning-based project that explores anomaly detection in power consumption time-series data.
 
@@ -10,13 +10,13 @@ The system generates synthetic power consumption data, introduces artificial ano
 
 The detected anomalies and consumption patterns are presented through an interactive Streamlit dashboard.
 
-2. Problem Statement
+## 2. Problem Statement
 
 Power consumption datasets may contain irregular patterns that differ from normal consumption behaviour. Identifying these irregularities is an important aspect of data monitoring and analysis.
 
 This project explores how unsupervised machine learning can be applied to detect unusual patterns in simulated electricity consumption data.
 
-3. Project Objectives
+## 3. Project Objectives
 
 - Generate synthetic power consumption time-series data.
 - Simulate unusual consumption patterns by introducing artificial anomalies.
@@ -24,7 +24,7 @@ This project explores how unsupervised machine learning can be applied to detect
 - Analyse and visualize detected anomalies.
 - Develop an interactive dashboard for presenting the results.
 
-4. Architecture
+## 4. Architecture
 
 ```mermaid
 flowchart TD
@@ -37,7 +37,7 @@ flowchart TD
     F --> H[Detection Metrics]
 ```
 
-5. Why Isolation Forest?
+## 5. Why Isolation Forest?
 
 Isolation Forest was selected because it is an unsupervised machine learning algorithm suitable for detecting unusual observations in numerical datasets.
 
@@ -51,6 +51,39 @@ Reasons for selecting this algorithm:
 
 In Grid-Guard, the model uses the power-consumption feature to identify potential anomalies.
 
+## Experimental Setup
+
+### Hardware
+- System: Dell Vostro 3420
+- Processor: 12th Gen Intel Core i3-1215U
+- CPU: 6 cores, 8 logical processors
+- RAM: 8 GB
+- OS: Windows 11 Home Single Language (64-bit)
+
+### Software
+- scikit-learn: 1.9.1
+- Streamlit: 1.66.1
+- NumPy: 2.4.6
+- Pandas: 3.0.6
+
+### Performance Evaluation
+
+Detection time was measured across five dataset sizes.
+Each configuration was executed three times, and the
+median detection time was calculated.
+
+| Dataset Size | Run 1 (ms) | Run 2 (ms) | Run 3 (ms) | Median (ms) |
+|---:|---:|---:|---:|---:|
+| 10,000 | 1252 | 649 | 563 | 649 |
+| 50,000 | 1618 | 1601 | 1710 | 1618 |
+| 100,000 | 2276 | 3115 | 3459 | 3115 |
+| 250,000 | 7149 | 9259 | 8453 | 8453 |
+| 500,000 | 16606 | 16488 | 17072 | 16606 |
+
+*Note: Results are specific to the hardware and software
+environment listed above. Execution time may vary with
+system load and other runtime conditions.*
+
 6. Technology Stack
 
 Component| Technology
@@ -60,7 +93,7 @@ Algorithm| Isolation Forest
 Data Processing| Pandas, NumPy
 Dashboard| Streamlit
 
-7. Methodology
+## 7. Methodology
 
 The project follows a sequence of processing stages:
 
@@ -80,7 +113,7 @@ Stage 4: Results Visualization
 
 Present consumption patterns and detected anomalies through a Streamlit dashboard.
 
-8. System Workflow
+## 8. System Workflow
 
 Synthetic Power Consumption Data
               |
@@ -99,7 +132,7 @@ Synthetic Power Consumption Data
               v
       Streamlit Dashboard
 
-9. Repository Structure
+## 9. Repository Structure
 
 AMD-SLINGSHOT/
 |
@@ -109,7 +142,7 @@ AMD-SLINGSHOT/
 |-- grid-guard-preview.html
 |-- README.md
 
-10. Installation and Execution
+## 10. Installation and Execution
 
 Step 1: Clone the Repository
 
@@ -127,14 +160,14 @@ Step 4: Run the Application
 
 streamlit run app.py
 
-11. Current Scope and Limitations
+## 11. Current Scope and Limitations
 
 - The current implementation uses synthetic power consumption data.
 - Artificial anomalies are introduced to simulate irregular consumption patterns.
 - The model has not yet been validated on real-world electricity consumption datasets.
 - Detection performance and generalization to real-world conditions require further evaluation.
 
-12. Future Scope
+## 12. Future Scope
 
 - Evaluate the model using real-world electricity consumption datasets.
 - Compare Isolation Forest with alternative anomaly detection algorithms.
@@ -142,7 +175,7 @@ streamlit run app.py
 - Investigate integration with IoT-based power monitoring systems.
 - Explore real-time anomaly detection using live data sources.
 
-13. Author
+## 13. Author
 
 Pritha Rakshit
 
@@ -152,13 +185,13 @@ GitHub: "PrithaRakshit" (https://github.com/PrithaRakshit)
 
 ---
 
-14. Dashboard Screenshot
+## 14. Dashboard Screenshot
 
 "Grid-Guard Anomaly Detection Dashboard" (https://github.com/PrithaRakshit/AMD-SLINGSHOT/blob/main/2026-11-03T00-27_chart.png?raw=true)
 
 "Grid-Guard Anomaly Detection Dashboard" (https://github.com/PrithaRakshit/AMD-SLINGSHOT/blob/main/2026-11-03T01-21_chart.png?raw=true)
 
-15. Dashboard Overview
+## 15. Dashboard Overview
 
 "Grid-Guard Dashboard Overview" (https://github.com/PrithaRakshit/AMD-SLINGSHOT/blob/main/Screenshot%202026-11-03%20011131.png?raw=true)
 
