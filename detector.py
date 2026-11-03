@@ -17,11 +17,20 @@ def get_data(n: int = 500_000) -> pd.DataFrame:
         + np.random.normal(0, 1, n)
     )
 
-    # Inject 500 hard anomalies (grid faults / bursts)
-    anomaly_indices = np.random.choice(n, 500, replace=False)
-    power[anomaly_indices] += np.random.uniform(20, 50, 500)
+   # Inject 500 hard anomalies (grid faults / bursts)
+num_anomalies = min(500, n)
+anomaly_indices = np.random.choice(n, num_anomalies, replace=False)
+power[anomaly_indices] += np.random.uniform(20, 50, num_anomalies)
 
-    df = pd.DataFrame({"time": time, "power": power})
+# Ground-truth labels: 0 = normal, 1 = anomaly
+true_labels = np.zeros(n, dtype=int)
+true_labels[anomaly_indices] = 1
+
+   df = pd.DataFrame({
+    "time": time,
+    "power": power,
+    "true_anomaly": true_labels
+})
     df["hour"] = (time // (1_000 / 24)).astype(int) % 24  # synthetic hour-of-day
     return df
 
