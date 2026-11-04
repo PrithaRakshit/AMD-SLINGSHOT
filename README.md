@@ -93,7 +93,10 @@ xychart-beta
     y-axis "Detection Time (ms)" 0 --> 18000
     bar [649, 1618, 3115, 8453, 16606]
 ```
-
+The results show an increase in detection time as the dataset size
+grows. The observed execution time depends on dataset size, hardware
+resources, and runtime conditions. These measurements represent
+experiments conducted on the local system described above.
 
 ## 6. Technology Stack
 
@@ -106,26 +109,27 @@ Dashboard| Streamlit
 
 ## 7. Methodology
 
-The project follows a sequence of processing stages:
+The project follows a structured machine learning pipeline:
 
-Stage 1: Synthetic Data Generation
+### Stage 1: Synthetic Data Generation
+Generate simulated power consumption time-series data using a daily sinusoidal pattern with Gaussian noise.
 
-Generate simulated power consumption time-series data to represent consumption patterns.
+### Stage 2: Anomaly Injection
+Inject artificial anomalies into the generated dataset by adding random spikes to selected power consumption readings. Ground-truth labels are maintained for evaluation.
 
-Stage 2: Anomaly Injection
+### Stage 3: Data Processing
+Prepare the generated data and select the power consumption feature for model input.
 
-Introduce artificial irregularities into the generated dataset to simulate unusual consumption behaviour.
+### Stage 4: Anomaly Detection
+Apply the Isolation Forest algorithm to identify unusual observations. The model returns anomaly predictions and decision scores.
 
-Stage 3: Anomaly Detection
+### Stage 5: Model Evaluation
+Compare predicted anomalies with the injected ground-truth labels using precision, recall, F1-score, and a confusion matrix.
 
-Apply the Isolation Forest algorithm to identify observations that differ from the general data distribution.
+### Stage 6: Results Visualization
+Display power consumption patterns, detected anomalies, evaluation metrics, and performance information through an interactive Streamlit dashboard.
 
-Stage 4: Results Visualization
-
-Present consumption patterns and detected anomalies through a Streamlit dashboard.
-
-## 8. System Workflow
-
+ ## 8. Workflow
 Synthetic Power Consumption Data
               |
               v
@@ -138,36 +142,59 @@ Synthetic Power Consumption Data
        Isolation Forest
               |
               v
-       Anomaly Detection
+    Anomaly Prediction
+              |
+              v
+      Model Evaluation
               |
               v
       Streamlit Dashboard
+              |
+              v
+       Result Visualization
+
 
 ## 9. Repository Structure
 
 AMD-SLINGSHOT/
-|
-|-- app.py
-|-- detector.py
-|-- requirements.txt
-|-- grid-guard-preview.html
-|-- README.md
+│
+├── app.py                  # Streamlit dashboard
+├── detector.py             # Synthetic data generation and anomaly detection
+├── requirements.txt        # Project dependencies
+├── grid-guard-preview.html # Dashboard preview
+├── README.md               # Project documentation
+├── .gitignore              # Ignored files
+└── Dashboard screenshots   # Result visualizations
 
 ## 10. Installation and Execution
 
-Step 1: Clone the Repository
+### Prerequisites
+- Python 3.10 or later
+- pip package manager
+
+### Step 1: Clone the Repository
 
 git clone https://github.com/PrithaRakshit/AMD-SLINGSHOT.git
 
-Step 2: Navigate to the Project Directory
+### Step 2: Navigate to the Project Directory
 
 cd AMD-SLINGSHOT
 
-Step 3: Install Dependencies
+### Step 3: Create a Virtual Environment
+
+python -m venv venv
+
+### Step 4: Activate the Virtual Environment
+
+Windows:
+
+venv\Scripts\activate
+
+### Step 5: Install Dependencies
 
 pip install -r requirements.txt
 
-Step 4: Run the Application
+### Step 6: Run the Application
 
 streamlit run app.py
 
