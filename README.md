@@ -129,7 +129,24 @@ Compare predicted anomalies with the injected ground-truth labels using precisio
 ### Stage 6: Results Visualization
 Display power consumption patterns, detected anomalies, evaluation metrics, and performance information through an interactive Streamlit dashboard.
 
- ## 8. Workflow
+## 8. Model Evaluation
+
+The Isolation Forest model is evaluated by comparing its
+predictions with the ground-truth labels generated during
+synthetic anomaly injection.
+
+The following evaluation metrics are used:
+
+- **Precision:** Measures how many detected anomalies are actually anomalies.
+- **Recall:** Measures how many actual anomalies are successfully detected.
+- **F1-Score:** Represents the harmonic mean of precision and recall.
+- **Confusion Matrix:** Summarizes true positives, true negatives,
+  false positives, and false negatives.
+
+These metrics help assess the model's ability to identify
+artificially injected anomalies in the synthetic dataset.
+
+ ## 9. Workflow
 Synthetic Power Consumption Data
               |
               v
@@ -154,7 +171,7 @@ Synthetic Power Consumption Data
        Result Visualization
 
 
-## 9. Repository Structure
+## 10. Repository Structure
 
 AMD-SLINGSHOT/
 │
@@ -166,7 +183,7 @@ AMD-SLINGSHOT/
 ├── .gitignore              # Ignored files
 └── Dashboard screenshots   # Result visualizations
 
-## 10. Installation and Execution
+## 11. Installation and Execution
 
 ### Prerequisites
 - Python 3.10 or later
@@ -198,14 +215,14 @@ pip install -r requirements.txt
 
 streamlit run app.py
 
-## 11. Current Scope and Limitations
+## 12. Current Scope and Limitations
 
 - The current implementation uses synthetic power consumption data.
 - Artificial anomalies are introduced to simulate irregular consumption patterns.
 - The model has not yet been validated on real-world electricity consumption datasets.
 - Detection performance and generalization to real-world conditions require further evaluation.
 
-## 12. Future Scope
+## 13. Future Scope
 
 - Evaluate the model using real-world electricity consumption datasets.
 - Compare Isolation Forest with alternative anomaly detection algorithms.
@@ -213,7 +230,7 @@ streamlit run app.py
 - Investigate integration with IoT-based power monitoring systems.
 - Explore real-time anomaly detection using live data sources.
 
-## 13. Author
+## 14. Author
 
 Pritha Rakshit
 
@@ -223,13 +240,13 @@ GitHub: "PrithaRakshit" (https://github.com/PrithaRakshit)
 
 ---
 
-## 14. Dashboard Screenshot
+## 15. Dashboard Screenshot
 
 "Grid-Guard Anomaly Detection Dashboard" (https://github.com/PrithaRakshit/AMD-SLINGSHOT/blob/main/2026-11-03T00-27_chart.png?raw=true)
 
 "Grid-Guard Anomaly Detection Dashboard" (https://github.com/PrithaRakshit/AMD-SLINGSHOT/blob/main/2026-11-03T01-21_chart.png?raw=true)
 
-## 15. Dashboard Overview
+## 16. Dashboard Overview
 
 "Grid-Guard Dashboard Overview" (https://github.com/PrithaRakshit/AMD-SLINGSHOT/blob/main/Screenshot%202026-11-03%20011131.png?raw=true)
 
